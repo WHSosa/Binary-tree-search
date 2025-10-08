@@ -95,6 +95,35 @@ void freeTree(BSTNode* root) {
     delete root;
 }
 
+void deleteRecursive(BSTNode*& root, int key) {
+     if (root == nullptr) {
+          return;
+     }
+     // 1. Locate the node
+     if (key < root->data) {
+        deleteRecursive(root->left, key);
+    } else if (key > root->data) {
+        deleteRecursive(root->right, key);
+    } else {      // Found the node
+    if (!root->left && !root->right) {
+            delete root;
+            root = nullptr;
+        }
+        // Case 2: One child: L or R pointer is nullptr
+        else if (!root->left || !root->right) {
+            BSTNode* child = root->left ? root->left : root->right;
+            delete root;
+            root = child;
+        }
+// Case 3: Two children
+        else {
+            BSTNode* succ = minValueNode(root->right);
+            root->data = succ->data;
+            deleteRecursive(root->right, succ->data);
+        }
+    }
+}
+
 
 int main(){
     BSTNode* root = nullptr;
