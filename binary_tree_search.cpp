@@ -49,6 +49,21 @@ if(value < parent->data) {
 }
 }
 
+bool searchRecursive(BSTNode* root, int key) {
+    if(!root) {
+        return false;
+    }
+    if(root->data == key) {
+        return true;
+    }
+    if(key < root->data) {
+        return searchRecursive(root->left, key);
+    } else {
+        return searchRecursive(root->right, key);
+    }
+}
+
+
 int main(){
     return 0;
 }
