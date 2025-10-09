@@ -155,7 +155,8 @@ int main(){
     insertRecursive(root, 4);
     insertIterative(root, 7);
     insertRecursive(root, 13);
-cout << "Inorder traversal: ";
+
+    cout << "Inorder traversal: ";
     inorderPrint(root);
     cout << "\n";
 
@@ -165,6 +166,24 @@ cout << "Inorder traversal: ";
         (searchIterative(root,9)?"Found":"Not Found") << "\n";
 
    // Always free dynamically allocated memory
+    freeTree(root);
+    root = nullptr;
+
+    // Perform deletions using deleteRecursive
+    cout << "\n--- Performing deletions ---\n";
+
+    cout << "Deleting 1 (leaf)...\n";
+    deleteRecursive(root, 1);
+    cout << "Deleting 14 (one child)...\n";
+    deleteRecursive(root, 14);
+    cout << "Deleting 8 (two children / root)...\n";
+    deleteRecursive(root, 8);
+
+    cout << "\nInorder traversal after deletions: ";
+    inorderPrint(root);
+    cout << "\n";
+
+    // Free all dynamically allocated nodes
     freeTree(root);
     root = nullptr;
 
